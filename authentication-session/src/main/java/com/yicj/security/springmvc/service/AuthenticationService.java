@@ -1,7 +1,7 @@
 package com.yicj.security.springmvc.service;
 
 import com.yicj.security.springmvc.model.AuthenticationRequest;
-import com.yicj.security.springmvc.model.UserDetails;
+import com.yicj.security.springmvc.model.UserDto;
 
 /**
  * 认证服务
@@ -15,5 +15,5 @@ import com.yicj.security.springmvc.model.UserDetails;
  */
 public interface AuthenticationService {
 
-    UserDetails authentication(AuthenticationRequest authenticationRequest);
+    UserDto authentication(AuthenticationRequest authenticationRequest);
 }

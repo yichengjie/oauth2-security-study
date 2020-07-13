@@ -1,7 +1,7 @@
 package com.yicj.security.springmvc.service.impl;
 
 import com.yicj.security.springmvc.model.AuthenticationRequest;
-import com.yicj.security.springmvc.model.UserDetails;
+import com.yicj.security.springmvc.model.UserDto;
 import com.yicj.security.springmvc.service.AuthenticationService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,20 +20,20 @@ import java.util.Map;
  */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private Map<String, UserDetails> userMap = new HashMap<>();
+    private Map<String, UserDto> userMap = new HashMap<>();
     {
-        userMap.put("zhangsan",new UserDetails("1010","zhangsan","123","张三","133443"));
-        userMap.put("lisi",new UserDetails("1011","lisi","456","李四","144553"));
+        userMap.put("zhangsan",new UserDto("1010","zhangsan","123","张三","133443"));
+        userMap.put("lisi",new UserDto("1011","lisi","456","李四","144553"));
     }
 
     @Override
-    public UserDetails authentication(AuthenticationRequest authenticationRequest) {
+    public UserDto authentication(AuthenticationRequest authenticationRequest) {
         if(authenticationRequest == null
                 || StringUtils.isEmpty(authenticationRequest.getUsername())
                 || StringUtils.isEmpty(authenticationRequest.getPassword())){
             throw new RuntimeException("username or password not empty");
         }
-        UserDetails userDto = getUserDto(authenticationRequest.getUsername());
+        UserDto userDto = getUserDto(authenticationRequest.getUsername());
         if(userDto == null){
             throw new RuntimeException("username is not exist");
         }
@@ -43,7 +43,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return userDto;
     }
 
-    public UserDetails getUserDto(String username){
+    public UserDto getUserDto(String username){
         return userMap.get(username);
     }
 
