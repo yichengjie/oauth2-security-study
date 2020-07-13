@@ -1,11 +1,14 @@
 package com.yicj.security.springmvc.config;
 
+import com.yicj.security.springmvc.interceptor.SimpleAuthenticationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -28,9 +31,17 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 )
 public class WebConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private SimpleAuthenticationInterceptor simpleAuthenticationInterceptor ;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(simpleAuthenticationInterceptor).addPathPatterns("/r/**") ;
     }
 
     // 视图解析器

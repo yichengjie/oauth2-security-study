@@ -3,6 +3,8 @@ package com.yicj.security.springmvc.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Set;
+
 /**
  * ClassName: UserDto
  * Description: TODO(描述)
@@ -22,4 +24,7 @@ public class UserDto {
     private String password;
     private String fullname;
     private String mobile;
+
+    // 用户权限
+    private Set<String> authorities ;
 }

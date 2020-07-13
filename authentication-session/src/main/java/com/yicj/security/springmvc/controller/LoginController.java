@@ -40,6 +40,11 @@ public class LoginController {
         return "退出成功" ;
     }
 
+    /**
+     * 测试资源1
+     * @param session
+     * @return
+     */
     @GetMapping(value = "/r/r1", produces = {"text/plain;charset=utf-8"})
     public String r1(HttpSession session){
         String fullname = null;
@@ -50,6 +55,24 @@ public class LoginController {
             fullname = "匿名";
         }
         return fullname + "访问资源1";
+    }
+
+
+    /**
+     * 测试资源2
+     * @param session
+     * @return
+     */
+    @GetMapping(value = "/r/r2", produces = {"text/plain;charset=utf-8"})
+    public String r2(HttpSession session){
+        String fullname = null;
+        Object userObj = session.getAttribute(UserDto.SESSION_USER_KEY);
+        if(userObj != null){
+            fullname = ((UserDto)userObj).getFullname();
+        }else{
+            fullname = "匿名";
+        }
+        return fullname + " 访问资源2";
     }
 
 
