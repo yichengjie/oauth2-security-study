@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * ClassName: SpringDataUserDetailsService
  * Description: TODO(描述)
@@ -35,8 +37,12 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         if (user == null){
             return null ;
         }
-        // 这里暂时使用静态数据
-        UserDetails userDetails = User.withUsername(user.getFullname()).password(user.getPassword()).authorities("p1").build();
+        // 查询用户权限
+        List<String> permissions = userDao.findPermissionsByUserId(user.getId());
+        String [] pers = new String[permissions.size()] ;
+        permissions.toArray(pers) ;
+        // 创建userDetails
+        UserDetails userDetails = User.withUsername(user.getFullname()).password(user.getPassword()).authorities(pers).build();
         return userDetails;
     }
 }
