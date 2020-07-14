@@ -2,6 +2,7 @@ package com.yicj.security.springmvc.init;
 
 import com.yicj.security.springmvc.config.ApplicationConfig;
 import com.yicj.security.springmvc.config.WebConfig;
+import com.yicj.security.springmvc.config.WebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -20,7 +21,7 @@ public class SpringApplicationInitializer extends AbstractAnnotationConfigDispat
     // 指定rootContext的配置
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {ApplicationConfig.class};
+        return new Class[] {ApplicationConfig.class, WebSecurityConfig.class};
     }
 
     //WebConfig.class对应以下配置的springmvc.xml
