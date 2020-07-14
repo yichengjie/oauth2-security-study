@@ -71,8 +71,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     //用来配置令牌端点的安全约束
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("permitAll()")
+        security.tokenKeyAccess("permitAll()") // oauth/token_key 安全配置
+                .checkTokenAccess("permitAll()") //oauth/check_token 安全配置
                 .allowFormAuthenticationForClients() ;
     }
 
