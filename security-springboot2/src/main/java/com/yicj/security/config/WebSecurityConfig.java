@@ -21,6 +21,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Spring Security可以通过 http.authorizeRequests() 对web请求进行授权保护
     //Spring Security使用标准Filter建立了对web请求的拦截，最终实现对资源的授权访问
+    // http.authorizeRequests() 对web资源进行授权保护
+    // 从Spring Security2.0版本开始支持服务层方法的安全性的支持（@PreAuthorize,@PostAuthorize, @Secured）
+    // 我们可以使用@EnableGlobalMethodSecurity启用基于注解的安全性
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
