@@ -22,7 +22,7 @@ public class TestBCrypt {
     @Test
     public void test1(){
         // 对原始密码加密
-        String hashpw = BCrypt.hashpw("123", BCrypt.gensalt()) ;
+        String hashpw = BCrypt.hashpw("secret", BCrypt.gensalt()) ;
         log.info("hashpw : {}", hashpw);
         //校验原始密码和BCrypt密码是否一致
         String pw = "$2a$10$DMzcQsmhTUdLexk6ZjalaO6iEBOUhDec9MfZ1pkzRfcDa6mx49bdC" ;
