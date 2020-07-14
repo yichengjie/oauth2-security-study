@@ -1,19 +1,10 @@
-package com.yicj.security.springmvc.controller;
+package com.yicj.security.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
-/**
- * ClassName: LoginController
- * Description: TODO(描述)
- * Date: 2020/7/13 21:28
- *
- * @author yicj(626659321 @ qq.com)
- * 修改记录
- * @version 产品版本信息 yyyy-mm-dd 姓名(邮箱) 修改信息
- */
 @RestController
 public class LoginController {
     /**
@@ -38,10 +29,8 @@ public class LoginController {
         return "访问资源2";
     }
 
-
     @RequestMapping(value = "/login-success", produces = {"text/plain;charset=utf-8"})
     public String loginSuccess(){
-
         return "登录成功" ;
     }
 }

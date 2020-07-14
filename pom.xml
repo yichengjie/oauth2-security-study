@@ -10,6 +10,7 @@
     <modules>
         <module>security-springmvc</module>
 		<module>security-spring-security</module>
+        <module>security-springboot</module>
     </modules>
     <packaging>pom</packaging>
 

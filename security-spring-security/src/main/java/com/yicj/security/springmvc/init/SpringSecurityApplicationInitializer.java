@@ -1,6 +1,5 @@
 package com.yicj.security.springmvc.init;
 
-import com.yicj.security.springmvc.config.WebSecurityConfig;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 /**
