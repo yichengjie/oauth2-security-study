@@ -24,6 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/r/r1").hasAuthority("p1")
+                .antMatchers("/r/r2").hasAuthority("p2")
+                .antMatchers("/r/r3").access("hasAnyAuthority('p1') and hasAuthority('p2')")
                 // url匹配/r/**的资源，经过认证后才能访问
                 .antMatchers("/r/**").authenticated()
                 // 其他url完全开放
