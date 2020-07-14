@@ -24,6 +24,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -41,7 +42,7 @@
 
             <dependency>
                 <groupId>javax.interceptor</groupId>
-                <artifactId>javax.interceptor‐api</artifactId>
+                <artifactId>javax.interceptor-api</artifactId>
                 <version>1.2</version>
             </dependency>
 

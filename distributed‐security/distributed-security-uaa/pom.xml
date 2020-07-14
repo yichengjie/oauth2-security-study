@@ -14,73 +14,78 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring‐cloud‐starter‐netflix‐ribbon</artifactId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring‐cloud‐starter‐openfeign</artifactId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.netflix.hystrix</groupId>
-            <artifactId>hystrix‐javanica</artifactId>
+            <artifactId>hystrix-javanica</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.retry</groupId>
-            <artifactId>spring‐retry</artifactId>
+            <artifactId>spring-retry</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring‐boot‐starter‐actuator</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring‐boot‐starter‐web</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring‐boot‐starter‐freemarker</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring‐data‐commons</artifactId>
+            <artifactId>spring-data-commons</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring‐cloud‐starter‐security</artifactId>
+            <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring‐cloud‐starter‐oauth2</artifactId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring‐security‐jwt</artifactId>
+            <artifactId>spring-security-jwt</artifactId>
         </dependency>
 
         <dependency>
             <groupId>javax.interceptor</groupId>
-            <artifactId>javax.interceptor‐api</artifactId>
+            <artifactId>javax.interceptor-api</artifactId>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
-            <artifactId>mysql‐connector‐java</artifactId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
-        <dependency>
+		<dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring‐boot‐starter‐jdbc</artifactId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <dependency>
@@ -96,7 +101,6 @@
 
     <build>
         <finalName>distributed-security-uaa</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
