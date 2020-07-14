@@ -12,6 +12,7 @@
 </head>
 <body>
     <form action="login" method="post">
+        <%--<input  type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         username：<input type="text" name="username"><br>
         password: <input type="password" name="password"><br>
         <input type="submit" value="login">

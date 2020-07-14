@@ -34,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .successForwardUrl("/login-success")
                     .permitAll()
-
+                    .and()
+                //屏蔽CSRF控制，即spring security不再限制CSRF
+                .csrf().disable()
         ;
     }
 }
