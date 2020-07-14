@@ -13,9 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 产品版本信息 yyyy-mm-dd 姓名(邮箱) 修改信息
  */
 @SpringBootApplication
-public class OrderServer {
+public class OrderServer2 {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderServer.class, args) ;
+        SpringApplication.run(OrderServer2.class, args) ;
     }
 }
