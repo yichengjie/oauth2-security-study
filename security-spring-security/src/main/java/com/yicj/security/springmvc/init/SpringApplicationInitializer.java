@@ -21,6 +21,7 @@ public class SpringApplicationInitializer extends AbstractAnnotationConfigDispat
     // 指定rootContext的配置
     @Override
     protected Class<?>[] getRootConfigClasses() {
+        // 注意这里需要将WebSecurityConfig添加到rootConfigClasses中而不是servletConfigClasses中
         return new Class[] {ApplicationConfig.class, WebSecurityConfig.class};
     }
 
