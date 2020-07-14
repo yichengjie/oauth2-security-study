@@ -6,6 +6,7 @@ import com.yicj.security.springmvc.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -73,6 +74,13 @@ public class LoginController {
             fullname = "匿名";
         }
         return fullname + " 访问资源2";
+    }
+
+
+    @RequestMapping(value = "/login-success", produces = {"text/plain;charset=utf-8"})
+    public String loginSuccess(){
+
+        return "登录成功" ;
     }
 
 

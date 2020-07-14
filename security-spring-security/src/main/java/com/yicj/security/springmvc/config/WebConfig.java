@@ -34,9 +34,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private SimpleAuthenticationInterceptor simpleAuthenticationInterceptor ;
 
+
+    //页面会根据WebConfig中addViewControllers配置规则，跳转至/login，/login是spring Security提供的登录页面
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/").setViewName("redirect:/login");
     }
 
     @Override
