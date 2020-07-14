@@ -54,7 +54,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
             .authorizedGrantTypes("authorization_code", "password", "client_credentials",
                     "implicit", "refresh_token") // 该client允许的授权类型
             .scopes("all") // 允许的授权范围
-            .autoApprove(false)
+            .autoApprove(true)
             .redirectUris("http://www.baidu.com") // 验证回调地址
         ;
     }
