@@ -9,11 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>distributed-security</artifactId>
+    <artifactId>distributed-security2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>distributed-security-uaa</module>
-        <module>distributed-security-order</module>
+        <module>distributed-security-uaa2</module>
+        <module>distributed-security-order2</module>
     </modules>
 
     <dependencyManagement>
