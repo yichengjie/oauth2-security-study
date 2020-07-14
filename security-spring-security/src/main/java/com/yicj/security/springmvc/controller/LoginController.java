@@ -48,14 +48,7 @@ public class LoginController {
      */
     @GetMapping(value = "/r/r1", produces = {"text/plain;charset=utf-8"})
     public String r1(HttpSession session){
-        String fullname = null;
-        Object userObj = session.getAttribute(UserDto.SESSION_USER_KEY);
-        if(userObj != null){
-            fullname = ((UserDto)userObj).getFullname();
-        }else{
-            fullname = "匿名";
-        }
-        return fullname + "访问资源1";
+        return "访问资源1";
     }
 
 
@@ -66,14 +59,8 @@ public class LoginController {
      */
     @GetMapping(value = "/r/r2", produces = {"text/plain;charset=utf-8"})
     public String r2(HttpSession session){
-        String fullname = null;
-        Object userObj = session.getAttribute(UserDto.SESSION_USER_KEY);
-        if(userObj != null){
-            fullname = ((UserDto)userObj).getFullname();
-        }else{
-            fullname = "匿名";
-        }
-        return fullname + " 访问资源2";
+
+        return "访问资源2";
     }
 
 

@@ -1,6 +1,5 @@
 package com.yicj.security.springmvc.config;
 
-import com.yicj.security.springmvc.interceptor.SimpleAuthenticationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,20 +29,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
     includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class)}
 )
 public class WebConfig implements WebMvcConfigurer {
-
-    @Autowired
-    private SimpleAuthenticationInterceptor simpleAuthenticationInterceptor ;
-
-
     //页面会根据WebConfig中addViewControllers配置规则，跳转至/login，/login是spring Security提供的登录页面
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("redirect:/login");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(simpleAuthenticationInterceptor).addPathPatterns("/r/**") ;
     }
 
     // 视图解析器
