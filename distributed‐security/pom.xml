@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>distributed-security-uaa</module>
+        <module>distributed-security-order</module>
     </modules>
 
     <dependencyManagement>
