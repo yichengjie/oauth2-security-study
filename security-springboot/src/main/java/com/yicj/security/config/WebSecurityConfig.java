@@ -18,19 +18,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    //Spring Security可以通过 http.authorizeRequests() 对web请求进行授权保护
+    //Spring Security使用标准Filter建立了对web请求的拦截，最终实现对资源的授权访问
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                //访问/r/r1资源的 url需要拥有p1权限
-                .antMatchers("/r/r1").hasAuthority("p1")
-                //访问/r/r2资源的 url需要拥有p2权限
-                .antMatchers("/r/r2").hasAuthority("p2")
                 // url匹配/r/**的资源，经过认证后才能访问
                 .antMatchers("/r/**").authenticated()
                 // 其他url完全开放
                 .anyRequest().permitAll()
                 .and()
                 //支持form表单认证，认证成功后转向/login-success
-                .formLogin().successForwardUrl("/login-success") ;
+                .formLogin()
+                    .loginPage("/login-view")
+                    .loginProcessingUrl("/login")
+                    .successForwardUrl("/login-success")
+                    .permitAll()
+
+        ;
     }
 }
