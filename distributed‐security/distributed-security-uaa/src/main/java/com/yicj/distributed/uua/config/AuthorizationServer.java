@@ -16,7 +16,11 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.Arrays;
 
 /**
  * ClassName: AuthorizationServer
@@ -41,6 +45,9 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtAccessTokenConverter accessTokenConverter;
+
 
     //1. 配置客户端详细信息
     //用来配置客户端详情服务
@@ -64,7 +71,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .authorizationCodeServices(authorizationCodeServices)
-                .tokenServices(tokenService())
+                .tokenServices(tokenServices())
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST) ;
     }
 
@@ -85,15 +92,29 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     //候，是使用随机值来进行填充的，除了持久化令牌是委托一个 TokenStore 接口来实现以外，这个类几乎帮你做了
     //所有的事情。并且 TokenStore 这个接口有一个默认的实现，它就是 InMemoryTokenStore ，如其命名，所有的
     //令牌是被保存在了内存中
-    @Bean
-    public AuthorizationServerTokenServices tokenService() {
-        DefaultTokenServices service = new DefaultTokenServices();
-        service.setClientDetailsService(clientDetailsService);
-        service.setSupportRefreshToken(true);
-        service.setTokenStore(tokenStore);
-        service.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
-        service.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
-        return service;
+//    @Bean
+//    public AuthorizationServerTokenServices tokenService() {
+//        DefaultTokenServices services = new DefaultTokenServices();
+//        services.setClientDetailsService(clientDetailsService);
+//        services.setSupportRefreshToken(true);
+//        services.setTokenStore(tokenStore);
+//        services.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
+//        services.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
+//        return services;
+//    }
+
+    // 定义jwt令牌服务
+    public AuthorizationServerTokenServices tokenServices(){
+        DefaultTokenServices services = new DefaultTokenServices();
+        services.setClientDetailsService(clientDetailsService);
+        services.setSupportRefreshToken(true);
+        services.setTokenStore(tokenStore);
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
+        services.setTokenEnhancer(tokenEnhancerChain);
+        services.setAccessTokenValiditySeconds(7200); // 令牌默认有效2小时
+        services.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
+        return services ;
     }
 
     @Bean
