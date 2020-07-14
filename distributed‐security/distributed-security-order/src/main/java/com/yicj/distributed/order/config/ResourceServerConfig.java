@@ -1,5 +1,6 @@
 package com.yicj.distributed.order.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResouceServerConfig
@@ -27,6 +29,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "res1" ;
 
+    //资源服务需要和授权服务拥有一致的签字、令牌服务等
+    @Autowired
+    private TokenStore tokenStore ;
+
 
     //ResourceServerTokenServices 是组成授权服务的另一半，如果你的授权服务和资源服务在同一个应用程序上的
     //话，你可以使用 DefaultTokenServices ，这样的话，你就不用考虑关于实现所有必要的接口的一致性问题。如果
@@ -38,7 +44,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 
         resources.resourceId(RESOURCE_ID)
-                .tokenServices(tokenService())
+                //.tokenServices(tokenService())
+                .tokenStore(tokenStore)
                 .stateless(true) ;
     }
 
@@ -61,7 +68,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     //资源服务令牌解析服务
-    @Bean
+    /*@Bean
     public ResourceServerTokenServices tokenService() {
     //使用远程服务请求授权服务器校验token,必须指定校验token 的url、client_id，client_secret
         RemoteTokenServices service=new RemoteTokenServices();
@@ -69,5 +76,5 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         service.setClientId("c1");
         service.setClientSecret("secret");
         return service;
-    }
+    }*/
 }
