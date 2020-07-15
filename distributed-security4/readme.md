@@ -1,2 +1,1 @@
-在distributed-security3的基础上删除普通资源服务器的认证授权（微服务间不做权限认证）
-这种可能依赖别的服务保证微服务的安全（暂时未改动与distributed-security3项目一样）
+在distributed-security3的基础上基于自定义权限表达式做认证授权
