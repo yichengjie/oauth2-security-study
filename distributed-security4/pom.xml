@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>distributed-security3</artifactId>
+    <artifactId>distributed-security4</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>distributed-security-uaa3</module>
-        <module>distributed-security-order3</module>
-        <module>distributed-security-discovery3</module>
-        <module>distributed-security-gateway3</module>
+        <module>distributed-security-uaa4</module>
+        <module>distributed-security-order4</module>
+        <module>distributed-security-discovery4</module>
+        <module>distributed-security-gateway4</module>
     </modules>
 
     <dependencyManagement>

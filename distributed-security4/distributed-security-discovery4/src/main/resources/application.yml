@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: distributed-discovery
+server:
+  port: 53000 # 启动端口
+
+eureka:
+  server:
+    enable-self-preservation: false # 关闭服务器自我保护，客户端心跳15分钟内错误率达80%服务会保护，导致别人还以为是好的服务
+    eviction-interval-timer-in-ms: 10000 #清理间隔（单位毫秒，默认是60 *1000）5秒将客户端提出的服务在虎屋注册列表中剔除
+    use-read-only-response-cache: true # eureka是cap理论基于ap策略，为了保证强一致性关闭此切换cp默认不关闭false
+  client:
+    register-with-eureka: false # false：不作为一个客户端注册到注册中心
+    fetch-registry: false # true时，可以启动，但是Cannot execute request on any known server
+    instance-info-replication-interval-seconds: 10
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/  # 注意这里不要写成default-zone否则报错
+  instance:
+    hostname: ${spring.cloud.client.ip-address} # 主机名
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+
