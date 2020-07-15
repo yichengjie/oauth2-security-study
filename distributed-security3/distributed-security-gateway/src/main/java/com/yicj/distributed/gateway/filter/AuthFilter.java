@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +51,6 @@ public class AuthFilter extends ZuulFilter {
         }
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication ;
         Authentication userAuthentication = oAuth2Authentication.getUserAuthentication();
-        Object principal = userAuthentication.getPrincipal();
         List<String> authorities = new ArrayList<>();
         userAuthentication.getAuthorities().stream().forEach(s -> {
             GrantedAuthority grantedAuthority = GrantedAuthority.class.cast(s) ;

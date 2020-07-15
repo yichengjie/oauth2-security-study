@@ -33,7 +33,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private TokenStore tokenStore ;
 
-
     //ResourceServerTokenServices 是组成授权服务的另一半，如果你的授权服务和资源服务在同一个应用程序上的
     //话，你可以使用 DefaultTokenServices ，这样的话，你就不用考虑关于实现所有必要的接口的一致性问题。如果
     //你的资源服务器是分离开的，那么你就必须要确保能够有匹配授权服务提供的 ResourceServerTokenServices，它
@@ -58,8 +57,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             .csrf()
                 .disable()
             .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) ;
-
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
     }
 }
