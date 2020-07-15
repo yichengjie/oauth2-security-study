@@ -14,6 +14,7 @@
 		<module>security-springboot2</module>
         <module>distributed-security</module>
 		<module>distributed-security2</module>
+		<module>distributed-security3</module>
     </modules>
     <packaging>pom</packaging>
 
