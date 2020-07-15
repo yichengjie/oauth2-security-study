@@ -14,6 +14,7 @@
     <modules>
         <module>distributed-security-uaa3</module>
         <module>distributed-security-order3</module>
+        <module>distributed-security-discovery</module>
     </modules>
 
     <dependencyManagement>
