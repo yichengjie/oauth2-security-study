@@ -42,7 +42,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     //RemoteTokenServices 资源服务器通过 HTTP 请求来解码令牌，每次都请求授权服务器端点 /oauth/check_token
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-
         resources.resourceId(RESOURCE_ID)
                 //.tokenServices(tokenService())
                 .tokenStore(tokenStore)
@@ -54,10 +53,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/r/r1").hasAuthority("p1")
-//                .antMatchers("/r/r2").hasAuthority("p2")
-                .antMatchers("/r/**").authenticated() // 所有/r/**请求必须认证通过
-                .anyRequest().permitAll() // 除了/r/**其他请求可以访问
+                .antMatchers("/r/**").access("#oauth2.hasScope('ROLE_ADMIN')")
                 .and()
             .csrf()
                 .disable()
@@ -66,15 +62,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         ;
     }
-
-    //资源服务令牌解析服务
-    /*@Bean
-    public ResourceServerTokenServices tokenService() {
-    //使用远程服务请求授权服务器校验token,必须指定校验token 的url、client_id，client_secret
-        RemoteTokenServices service=new RemoteTokenServices();
-        service.setCheckTokenEndpointUrl("http://localhost:53020/uaa/oauth/check_token");
-        service.setClientId("c1");
-        service.setClientSecret("secret");
-        return service;
-    }*/
 }
