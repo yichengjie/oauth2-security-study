@@ -23,14 +23,20 @@ public class OrderController {
     @GetMapping("/r1")
     @PreAuthorize("hasAnyAuthority('p1')")
     public String r1(){
-        UserDTO user = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
-        return user.getUsername() +" 访问资源1";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDTO){
+            return ((UserDTO)principal).getUsername() +" 访问资源1";
+        }
+        return principal.toString() + " <===> 访问资源1" ;
     }
 
     @GetMapping("/r2")
     @PreAuthorize("hasAnyAuthority('p2')")
     public String r2(){
-        UserDTO user = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
-        return user.getUsername() + " 访问资源2" ;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDTO){
+            return ((UserDTO)principal).getUsername() +" 访问资源2";
+        }
+        return principal.toString() + " <===> 访问资源2" ;
     }
 }
