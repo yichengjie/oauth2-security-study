@@ -19,8 +19,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.yicj.distributed.uua"})
-public class UAAServer2 {
+public class UAAServer3 {
     public static void main(String[] args) {
-        SpringApplication.run(UAAServer2.class, args) ;
+        SpringApplication.run(UAAServer3.class, args) ;
     }
 }
