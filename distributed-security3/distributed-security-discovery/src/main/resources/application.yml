@@ -14,9 +14,9 @@ eureka:
     fetch-registry: false # true时，可以启动，但是Cannot execute request on any known server
     instance-info-replication-interval-seconds: 10
     service-url:
-      default-zone: http://localhost:${server.port}/eureka/
+      defaultZone: http://localhost:${server.port}/eureka/  # 注意这里不要写成default-zone否则报错
   instance:
-    hostname: ${spring.cloud.client.ip-address}
+    hostname: ${spring.cloud.client.ip-address} # 主机名
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
 
