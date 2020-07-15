@@ -1,5 +1,6 @@
 package com.yicj.distributed.gateway.config;
 
+import com.yicj.distributed.gateway.component.GatewayWebSecurityExpressionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,54 +18,30 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * 修改记录
  * @version 产品版本信息 yyyy-mm-dd 姓名(邮箱) 修改信息
  */
+@EnableResourceServer
 @Configuration
-public class ResourceServerConfig  {
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     public static final String RESOURCE_ID = "res1" ;
+    @Autowired
+    private TokenStore tokenStore ;
 
-    // 统一认证服务（UUA）资源拦截
-    @Configuration
-    @EnableResourceServer
-    public class UUAServerConfig extends ResourceServerConfigurerAdapter{
+    @Autowired
+    private GatewayWebSecurityExpressionHandler gatewayWebSecurityExpressionHandler ;
 
-        @Autowired
-        private TokenStore tokenStore ;
-
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-            resources.tokenStore(tokenStore)
-                    .resourceId(RESOURCE_ID)
-                    .stateless(true) ;
-        }
-
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                    .antMatchers("/uua/**").permitAll() ;
-        }
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.expressionHandler(gatewayWebSecurityExpressionHandler)
+                .tokenStore(tokenStore)
+                .resourceId(RESOURCE_ID)
+                .stateless(true) ;
     }
 
-    //订单服务
-    @Configuration
-    @EnableResourceServer
-    public class OrderServiceConfig extends ResourceServerConfigurerAdapter{
-
-        @Autowired
-        private TokenStore tokenStore ;
-
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-            resources.tokenStore(tokenStore)
-                    .resourceId(RESOURCE_ID)
-                    .stateless(true) ;
-        }
-
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                    .antMatchers("/order/**")
-                    .access("#oauth2.hasScope('ROLE_API')") ;
-        }
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/uua/**").permitAll()
+                .antMatchers("/order/**").access("#permissionService.hasPermission(request,authentication)")
+        ;
     }
-
 }
